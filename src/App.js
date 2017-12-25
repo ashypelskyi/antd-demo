@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Layout, Row, Col, Modal, Form } from 'antd';
+import { Button, Layout, Row, Col, Modal, Form, Switch } from 'antd';
 import TestForm from 'components/TestForm'
 import 'App.css';
 
@@ -18,6 +18,9 @@ class App extends Component {
         },
         password: {
           value: '123'
+        },
+        switch: {
+          value: true
         },
         email: {
           value: `test@test.com`
@@ -40,6 +43,10 @@ class App extends Component {
           password: Form.createFormField({
             ...props.password,
             value: props.password.value,
+          }),
+          switch: Form.createFormField({
+            ...props.switch,
+            value: props.switch.value
           }),
           email: Form.createFormField({
             ...props.email,
@@ -65,6 +72,10 @@ class App extends Component {
     });
   };
 
+  _enableEmailFieldByDefault = (checked) => {
+    this.setState({ fields: { switch: { value: checked } } });
+  };
+
   render() {
     const fields = this.state.fields;
     const modalConfig = {
@@ -86,6 +97,7 @@ class App extends Component {
             <Col span={11} />
             <Col span={2}>
               <Button onClick={this._showModal} type='primary' size='large'>Show modal</Button>
+              <Switch onChange={this._enableEmailFieldByDefault} />
               <Modal {...modalConfig}>
                 {
                   CustomForm ?

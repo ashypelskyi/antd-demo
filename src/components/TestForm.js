@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Switch } from 'antd';
 const FormItem = Form.Item;
 
 class TestForm extends Component {
@@ -32,6 +32,11 @@ class TestForm extends Component {
                         <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
                         )
                     }
+                </FormItem>
+                <FormItem label="Show email field" >
+                    {getFieldDecorator('switch', { valuePropName: 'checked' })(
+                        <Switch />
+                    )}
                 </FormItem>
                 <FormItem>
                     {getFieldDecorator('email', {
