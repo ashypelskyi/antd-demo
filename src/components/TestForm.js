@@ -38,14 +38,18 @@ class TestForm extends Component {
                         <Switch />
                     )}
                 </FormItem>
-                <FormItem>
-                    {getFieldDecorator('email', {
-                        rules: [{ required: true, message: 'Please input your email!' }],
-                    })(
-                        <Input prefix={<Icon type="form" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
-                        )
-                    }
-                </FormItem>
+                {
+                    this.props.form.getFieldValue('switch') ?
+                        <FormItem>
+                            {getFieldDecorator('email', {
+                                rules: [{ required: true, message: 'Please input your email!' }],
+                            })(
+                                <Input prefix={<Icon type="form" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
+                                )
+                            }
+                        </FormItem> :
+                        <Fragment />
+                }
             </Form>
         );
     }

@@ -73,7 +73,9 @@ class App extends Component {
   };
 
   _enableEmailFieldByDefault = (checked) => {
-    this.setState({ fields: { switch: { value: checked } } });
+    const fields = { ...this.state.fields };
+    fields.switch.value = checked;
+    this.setState({ fields });
   };
 
   render() {
