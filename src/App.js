@@ -30,6 +30,7 @@ class App extends Component {
   }
 
   _showModal = () => {
+    const that = this;
     const formRef = Form.create({
       onFieldsChange(props, changedFields) {
         props.onChange(changedFields);
@@ -55,6 +56,9 @@ class App extends Component {
         };
       },
       onValuesChange(_, values) {
+        const fields = {..._};
+        that.setState({fields});
+        console.log(_);
         console.log(values);
       },
     })(props => (<TestForm {...props} />));
@@ -66,6 +70,7 @@ class App extends Component {
   };
 
   _hideModal = () => this.setState({ isShowModal: false, formRef: undefined });
+
   _handleFormChange = (changedFields) => {
     this.setState({
       fields: { ...this.state.fields, ...changedFields },
@@ -99,7 +104,7 @@ class App extends Component {
             <Col span={11} />
             <Col span={2}>
               <Button onClick={this._showModal} type='primary' size='large'>Show modal</Button>
-              <Switch onChange={this._enableEmailFieldByDefault} />
+              <Switch onChange={this._enableEmailFieldByDefault} checked={this.state.fields.switch.value} />
               <Modal {...modalConfig}>
                 {
                   CustomForm ?
